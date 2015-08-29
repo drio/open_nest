@@ -23,16 +23,7 @@
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
 
-Adafruit_8x8matrix matrix = Adafruit_8x8matrix();
-
-void setup() {
-  Serial.begin(9600);
-  Serial.println("8x8 LED Matrix Test");
-
-  matrix.begin(0x70);  // pass in the address
-}
-
-void loop() {
+void do_it(Adafruit_8x8matrix matrix) {
   matrix.setTextSize(1);
   matrix.setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
   matrix.setTextColor(LED_ON);
@@ -46,4 +37,20 @@ void loop() {
   }
 
   matrix.setRotation(0);
+}
+
+Adafruit_8x8matrix low_matrix = Adafruit_8x8matrix();
+Adafruit_8x8matrix high_matrix = Adafruit_8x8matrix();
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("8x8 LED Matrix Test");
+
+  low_matrix.begin(0x70);
+  high_matrix.begin(0x71);
+}
+
+void loop() {
+  do_it(low_matrix);
+  do_it(high_matrix);
 }
