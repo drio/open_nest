@@ -13,7 +13,6 @@ void display_single(Adafruit_8x8matrix m, char digit) {
 }
 
 void display_number(char *number) {
-
   display_single(matrix_low, number[1]);
   display_single(matrix_high, number[0]);
 }
@@ -32,5 +31,18 @@ void setup() {
 }
 
 void loop() {
+
+  int voltage = analogRead(A0) * (5.0 / 1023.0);
+
+  char buf[12];
+  itoa(voltage, buf, 10);
+  display_number();
+
+  Serial.println(analogRead(A0));
+  Serial.println(voltage);
+  Serial.println(buf);
+  Serial.println("--");
+
+  delay(2000);
   //display.doIt();
 }
