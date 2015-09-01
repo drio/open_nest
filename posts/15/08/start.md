@@ -10,7 +10,7 @@ libraries from the main project directory. What is worse, the only way I could
 successfully use the library that abstracts the interactions with the backpacks
 (displays) was by instantiating an object in the global space. That was very
 annoying. Any attempt to move away from that was a failure. I couldn't even
-instantiate within a function without getting compilation errors.
+instantiate it within a function without getting compilation errors.
 
 I will eventually move away from the Arduino IDE and run things from the
 command line.  I am coding in vim and running the arduino IDE fromt here using
