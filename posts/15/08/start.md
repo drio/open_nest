@@ -24,5 +24,6 @@ small voltage value changes. I have to investigate further. Also, I am going to
 receive soon a more powerful
 [thermometer](https://www.adafruit.com/products/1899) with humidity support.
 
+![](https://api.monosnap.com/rpc/file/download?id=6fWUXW4yBurQIiwF9QCMwQqflQZJBu)
 
 -drd
