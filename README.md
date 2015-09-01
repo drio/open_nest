@@ -28,7 +28,9 @@ want to send small bits of data back and forth between our open nest and a serve
 This server can be a Rasberry PI. But most importantly, the nRF24L01 chips are
 cheap. If you want to start adding more of this devices around your home, things
 can start getting pretty expensive. Also, there is the concern of power consumption.
-We want our nest to run for months on a couple of AAA batteries.
+We want our nest to run for months on a couple of AAA batteries. For example, I
+can imagine gathering more temperature measurements in different parts of the house
+to make the activation of the AC/Heat system more efficient.
 
 ### Questions and Feedback
 
