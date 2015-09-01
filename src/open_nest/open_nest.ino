@@ -33,7 +33,8 @@ void display_init() {
 
 float current_temp() {
   float voltage, celsius, fahrenheit;
-  voltage    = (analogRead(PIN_TEMP) * 5.0) / 1024.0;
+  voltage    = analogRead(PIN_TEMP);
+  voltage    = (voltage * 5.0) / 1024.0;
   celsius    = (voltage - 0.5) * 100.0;
   fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
 
