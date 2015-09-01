@@ -22,7 +22,7 @@ thermometer output.  The voltage values are reasonable but the statements to
 compute the Celsius temperature end up generating very different values for
 small voltage value changes. I have to investigate further. Also, I am going to
 receive soon a more powerful
-[thermometer](https://www.adafruit.com/products/1899) with humidity support on
-it.
+[thermometer](https://www.adafruit.com/products/1899) with humidity support.
+
 
 -drd
