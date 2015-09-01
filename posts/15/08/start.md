@@ -13,7 +13,8 @@ annoying. Any attempt to move away from that was a failure. I couldn't even
 instantiate it within a function without getting compilation errors.
 
 I will eventually move away from the Arduino IDE and run things from the
-command line.  I am coding in vim and running the arduino IDE fromt here using
+command line.  For now I am coding in vim and running the arduino IDE from 
+there using
 [this](http://usevim.com/2015/05/25/hardy/) plugin.
 
 The other complication was computing the current temperature from the
