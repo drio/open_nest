@@ -4,9 +4,9 @@
 
 #define PIN_POT        A0
 #define PIN_TEMP       A1
-#define PIN_RED        9
-#define PIN_GREEN      10
-#define PIN_BLUE       11
+#define PIN_RED        7
+#define PIN_GREEN      6
+#define PIN_BLUE       5
 #define STATUS_AC_ON   0
 #define STATUS_HEAT_ON 1
 #define STATUS_OFF     2
