@@ -4,20 +4,27 @@
 #include "led.h"
 #include "display.h"
 #include "pot.h"
+#include "temp.h"
+#include "relay.h"
 
-#define PIN_TEMP  A1
 
 void setup() {
   Serial.begin(9600);
   led_init();
   display_init();
+  temp_init();
+  relay_init();
 }
 
 void loop() {
-  //char msg[10];
-  //led_status(STATUS_AC_ON);
-  //itoa(pot_read(), msg, 10);
-  Serial.println(pot_read());
   display_number(pot_read());
-  delay(50);
+  Serial.println(temp_read().temperature);
+  Serial.println(temp_read().humidity);
+  relay_heat_on();
+  relay_ac_on();
+  delay(4000);
+
+  relay_heat_off();
+  relay_ac_off();
+  delay(4000);
 }
