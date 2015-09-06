@@ -73,12 +73,7 @@ void setup() {
 }
 
 void loop() {
-  int voltage = analogRead(A0) * (5.0 / 1023.0);
-  char buf[12];
-  itoa(voltage, buf, 10);
-  display_number(buf);
-
-  current_temp();
+  display_number("7");
 
   change_status(STATUS_AC_ON);
   delay(2000);
