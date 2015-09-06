@@ -14,9 +14,11 @@ void display_single(Adafruit_8x8matrix m, char digit) {
   m.writeDisplay();
 }
 
-void display_number(char *number) {
-  display_single(display.high, number[0]);
-  display_single(display.low, number[1]);
+void display_number(int number) {
+  char buff[6];
+  itoa(number, buff, 10);
+  display_single(display.high, buff[0]);
+  display_single(display.low, buff[1]);
 }
 
 void display_init() {

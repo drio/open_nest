@@ -10,7 +10,7 @@ typedef struct {
 } matrix_display;
 
 void display_init();
-void display_number(char *number);
+void display_number(int number);
 void display_single(Adafruit_8x8matrix m, char digit);
 
 #endif

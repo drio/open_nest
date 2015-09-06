@@ -14,10 +14,10 @@ void setup() {
 }
 
 void loop() {
-  char msg[10];
+  //char msg[10];
   //led_status(STATUS_AC_ON);
-  itoa(pot_read(), msg, 10);
+  //itoa(pot_read(), msg, 10);
   Serial.println(pot_read());
-  display_number(msg);
+  display_number(pot_read());
   delay(50);
 }
