@@ -14,13 +14,16 @@ void setup() {
 }
 
 void loop() {
-  char msg[3] = "71";
-  display_number(msg);
 
   led_status(STATUS_AC_ON);
+  display_number("21");
   delay(2000);
+
   led_status(STATUS_HEAT_ON);
+  display_number("22");
   delay(2000);
+
   led_status(STATUS_OFF);
+  display_number("23");
   delay(2000);
 }
