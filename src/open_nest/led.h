@@ -11,7 +11,7 @@
 
 void led_init();
 void led_color(int r, int g, int b);
-void change_status(int status);
+void led_status(int status);
 
 #endif
 

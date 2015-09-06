@@ -13,7 +13,7 @@ void led_color(int r, int g, int b) {
   analogWrite(PIN_BLUE, b);
 }
 
-void change_status(int status) {
+void led_status(int status) {
   if (status == STATUS_AC_ON)   led_color(0,0,255);
   if (status == STATUS_HEAT_ON) led_color(255,0,0);
   if (status == STATUS_OFF)     led_color(0,0,0);
