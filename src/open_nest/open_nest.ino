@@ -19,5 +19,5 @@ void loop() {
   itoa(pot_read(), msg, 10);
   Serial.println(pot_read());
   display_number(msg);
-  delay(1000);
+  delay(50);
 }
