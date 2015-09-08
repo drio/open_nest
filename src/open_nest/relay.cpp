@@ -10,4 +10,6 @@ void relay_heat_off() { digitalWrite(PIN_RELAY_2, HIGH); }
 void relay_init() {
   pinMode(PIN_RELAY_1, OUTPUT);
   pinMode(PIN_RELAY_2, OUTPUT);
+  relay_ac_off();
+  relay_heat_off();
 }

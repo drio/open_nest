@@ -11,7 +11,8 @@
 #define POT_TEMP_MAX 30
 #define POT_STEP ((POT_MAX - POT_MIN) / (POT_TEMP_MAX - POT_TEMP_MIN))
 
-int pot_read();
+int pot_read_temperature();
+float pot_read_voltage();
 
 #endif
 

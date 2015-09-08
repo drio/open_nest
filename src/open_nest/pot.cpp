@@ -15,6 +15,10 @@ int fromVoltToTemp(int voltage) {
   return POT_TEMP_MIN + j;
 }
 
-int pot_read() {
+int pot_read_temperature() {
   return fromVoltToTemp(analogRead(PIN_POT));
+}
+
+float pot_read_voltage() {
+  return analogRead(PIN_POT);
 }
