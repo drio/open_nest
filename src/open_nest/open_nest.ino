@@ -19,8 +19,17 @@ int lastChantedPot = -80;
 int desiredTemp = 0;
 int currentTemp = 0;
 
+// Instanciate class to deal with RF24 hardware
 RF24 radio(9,10);
+// Addresses for the pipes to read and write
 const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0xF0F0F0F0D2LL };
+// This is what we will send back to the remote RF24
+typedef struct {
+  int16_t desired_temp;
+  int16_t current_temp;
+  int16_t current_humidity;
+} paquet;
+
 
 void setup() {
   //Serial.begin(9600);
@@ -29,37 +38,42 @@ void setup() {
   temp_init();
   relay_init();
 
+  // Setup the RF24 radio and start listening.
   Serial.begin(57600);
   printf_begin();
-  printf("\nRemote Switch Arduino\n\r");
-
   radio.begin();
-  radio.setRetries(15,15);
-
+  radio.setRetries(15,15); // Delay, Count
   radio.openWritingPipe(pipes[1]);
-  radio.openReadingPipe(1,pipes[0]);
+  radio.openReadingPipe(1, pipes[0]);
   radio.startListening();
   radio.printDetails();
 }
 
 void loop() {
   static int wait = 0;
+  static unsigned short remoteTemp;
 
   if (radio.available()) {
-    printf("Radio ... %d\n", radio.available());
-    unsigned short rawMessage;
-    radio.read( &rawMessage, sizeof(unsigned long) );
-    printf("Got message %d...",rawMessage);
+    bool done = false;
+    while (!done) {
+      done = radio.read(&remoteTemp, sizeof(remoteTemp));
+    }
+    printf("Requested temperature: %d\n", remoteTemp);
 
-    //performAction(rawMessage);
-    desiredTemp = (int) rawMessage;
-    display_number(desiredTemp);
+    // only process reasonable temperatures
+    if (remoteTemp >= 18 && remoteTemp <= 30) {
+      desiredTemp = (int) remoteTemp;
+      display_number(desiredTemp);
+    }
 
-    //send back
+    // Send a confirmation back.
+    paquet answer;
+    answer.desired_temp     = desiredTemp;
+    answer.current_temp     = temp_read().temperature;
+    answer.current_humidity = temp_read().humidity;
     radio.stopListening();
-    unsigned short answer = 27;
-    radio.write(&answer, sizeof(unsigned short) );
-    printf("Sent response.\n\r");
+    radio.write(&answer, sizeof(answer));
+    printf("Sent response.\n");
     radio.startListening();
 
     delay(10);
