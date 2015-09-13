@@ -1,14 +1,7 @@
 # Arduino Make file. Refer to https://github.com/sudar/Arduino-Makefile
 
 BOARD_TAG=uno
-PI_SSH=pi@192.168.1.232
 include /usr/local/opt/arduino-mk/Arduino.mk
-
-.PHONY:
-
-pi:
-	scp -q ../rpi/RF24RaspberryCommunicator/remote.cpp $(PI_SSH):/home/pi/arduino/RF24RaspberryCommunicator/
-	ssh $(PI_SSH) '(cd /home/pi/arduino/RF24RaspberryCommunicator/; make)'
 
 # --- leonardo (or pro micro w/leo bootloader)
 #BOARD_TAG    = leonardo
