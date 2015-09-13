@@ -1,0 +1,66 @@
+#!/usr/bin/env sh
+# vim :ft=sh:
+
+EXCLUDE='--exclude=node_modules --exclude=.git'
+
+usage() {
+  cat <<EOF
+Usage: $0 [-h] [-a] [-s] [-w]
+
+  -a              Transfer project to apu
+  -c <prj_name> : Create a clean scratch env in current dir
+  -s            : Serve
+  -w            : Watch mode
+EOF
+}
+
+runWP() {
+  local FLAG=$1
+  ./node_modules/.bin/webpack $FLAG
+}
+
+while getopts ":ac:hsw" opt; do
+  case $opt in
+    a)
+      PRJ_NAME=$(basename $(pwd))
+      webpack
+      rsync -avz --delete -e ssh -r $EXCLUDE * .gitignore apu:public_html/$PRJ_NAME
+      echo "🚀  http://davidr.io/~drio/$PRJ_NAME"
+      ;;
+    c)
+      PRJ_NAME=$OPTARG
+      if [ -d ./$PRJ_NAME ];then
+        echo "Project already there, bailing out."
+      else
+        base_dir="$(dirname $0)/.."
+        mkdir $PRJ_NAME
+        rsync -avz $EXCLUDE $base_dir/ ./$PRJ_NAME/
+        echo ""
+        echo "✨  Project created ./$PRJ_NAME."
+      fi
+      ;;
+    h)
+      usage
+      exit 0
+      ;;
+    s)
+      webpack-dev-server --progress --colors --port=8181
+      ;;
+    w)
+      runWP '--progress --colors --watch'
+      ;;
+    \?)
+      usage
+      exit 0
+      ;;
+    *)
+      usage
+      exit 0
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument."
+      exit 1
+  esac
+done
+
+[ $# -eq 0 ] && usage
