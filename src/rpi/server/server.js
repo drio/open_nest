@@ -1,6 +1,15 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var child = require('child_process');
+var binRemote = "../RF24RaspberryCommunicator/remotish.sh"
+
+var runProcess = function(temp) {
+  var processOutput = function(err, stdout, stderr) {
+    return(stdout);
+  }
+  return child.execFile(binRemote, ['-t', temp], processOutput);
+}
 
 app.set('port', 3005);
 
@@ -13,7 +22,10 @@ app.get('/build/bundle.js', function(req, res){
 });
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  socket.on('temp', function(msg) {
+    console.log('temp message received');
+    io.emit('chat message', runProcess(0));
+  });
 });
 
 http.listen(app.get('port'), function(){
