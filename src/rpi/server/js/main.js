@@ -1,6 +1,7 @@
 require('../sass/styles.sass')
 var Model = require('ampersand-model');
 var View = require('ampersand-view');
+var socket = io();
 
 var Temperature = Model.extend({
     props: {
