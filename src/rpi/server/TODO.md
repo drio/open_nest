@@ -12,8 +12,9 @@
 Action items:
 
 - modify remote so it dumps json
-- implement temp. When there is number, pass it, if not set it to 0 to indicate
-  you want to get a current temperature status
+- implement temp in server. When there is number, pass it, if not set it to 0 to indicate
+  you want to get a current temperature status.
+  We will spawn a remote process and capture its output.
 
 - in the client app, when loading, send a status request and create a module based
   on the curren temp.

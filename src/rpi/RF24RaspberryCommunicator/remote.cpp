@@ -58,10 +58,11 @@ bool sendMessage(unsigned int temperature){
   else {
     paquet answer;
     radio.read(&answer, sizeof(answer));
-		printf("Great, got response:\n");
-		printf("- desired temp    : %d \n", answer.desired_temp);
-		printf("- current temp    : %d \n", answer.current_temp);
-		printf("- current humidity: %d \n", answer.current_humidity);
+		printf("{\n");
+		printf("desired: %d,\n", answer.desired_temp);
+		printf("current: %d,\n", answer.current_temp);
+		printf("humidity: %d\n", answer.current_humidity);
+		printf("}");
 		return true;
 	}
 }
