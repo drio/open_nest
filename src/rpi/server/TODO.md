@@ -18,8 +18,8 @@ not set it to 0 to indicate you want to get a current
 temperature status. We will spawn a remote process and
 capture its output.
 
-- in the client app, when loading, send a status request and
-create a module based on the curren temp.
+DONE - in the client app, when loading, send a status request and
+create a model based on the curren temp.
 
 - when clicking in +/-, send a io message to set temp.
 Ampersand will update the view once we get the data back from

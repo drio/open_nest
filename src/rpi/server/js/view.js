@@ -12,12 +12,13 @@ var TempView = View.extend({
   },
 
   events: {
-    'mousedown .button': 'clicked'
+    'mousedown .more': 'tempUp',
+    'mousedown .less': 'tempDown'
   },
 
-  clicked: function(e) {
-    console.log("Clicked!!!");
-  },
+  tempUp: function() { this.model.desired += 1; },
+
+  tempDown: function() { this.model.desired -= 1; },
 
   render: function() {
     this.renderWithTemplate(this);

@@ -1,14 +1,26 @@
 require('../sass/styles.sass')
+
 var Temperature = require('../js/model')
 var TempView    = require('../js/view')
 var socket      = io();
+var model       = new Temperature();
+var view        = new TempView({model: model});
 
-var aModel = new Temperature({current: 25, desired: 22, humidity: 60});
-aModel.on('change:humidity', function () {
-  console.log('Humidity changed!');
+model.on('change:desired', function() {
+  socket.emit('temp', model.desired);
 });
 
-aView = new TempView({model: aModel});
-aView.render();
-document.querySelector('#container').appendChild(aView.el);
-aModel.humidity = 44;
+socket.emit('temp', 0);
+
+socket.on('temp', function(statusString){
+  var status = JSON.parse(statusString);
+
+  ['current', 'desired', 'humidity'].forEach(function(k) {
+    model[k] = status[k];
+  });
+
+  view.render();
+  document.querySelector('#container').appendChild(view.el);
+});
+
+

@@ -6,13 +6,7 @@ error() {
 }
 
 [ "$1" != "-t" ] && error
-[ ".$2" == "." ]  && error
+[ ".$2" == "." ] && error
 
 temp=$2
-cat <<EOF
-{
-  desired: $temp,
-  current: 30,
-  humidity: 55
-}
-EOF
+echo "{\"desired\": $temp, \"current\": 30, \"humidity\": 55}"
