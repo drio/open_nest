@@ -15,7 +15,7 @@ model.on('change:desired', function() {
   if (model.fresh)
     model.fresh = false;
   else
-    d3.select('.send').classed('hide', false);
+    d3.select('#send').classed('hide', false);
 });
 
 socket.on('temp', function(statusString){

@@ -15,7 +15,7 @@ var TempView = View.extend({
   events: {
     'mousedown .more': 'tempUp',
     'mousedown .less': 'tempDown',
-    'mousedown .send': 'send'
+    'mousedown #send': 'send'
   },
 
   tempUp: function() { this.model.desired += 1; },
@@ -23,7 +23,7 @@ var TempView = View.extend({
   tempDown: function() { this.model.desired -= 1; },
 
   send: function () {
-    d3.select('.send').classed('show', true);
+    d3.select('#send').classed('hide', true);
     socket.emit('temp', this.model.desired);
   },
 
