@@ -1,16 +1,24 @@
 require('../sass/styles.sass')
 
 var Temperature = require('../js/model')
-var TempView    = require('../js/view')
-var socket      = io();
-var model       = new Temperature();
-var view        = new TempView({model: model});
+var TempView = require('../js/view')
+var socket   = io();
+var d3       = require('d3');
+
+var model = new Temperature();
+var view  = new TempView({model: model});
+view.render();
+document.querySelector('#container').appendChild(view.el);
 
 model.on('change:desired', function() {
   socket.emit('temp', model.desired);
+  if (model.fresh) {
+    model.fresh = false;
+  }
+  else {
+    d3.select('.send').classed('show', true);
+  }
 });
-
-socket.emit('temp', 0);
 
 socket.on('temp', function(statusString){
   var status = JSON.parse(statusString);
@@ -18,9 +26,6 @@ socket.on('temp', function(statusString){
   ['current', 'desired', 'humidity'].forEach(function(k) {
     model[k] = status[k];
   });
-
-  view.render();
-  document.querySelector('#container').appendChild(view.el);
 });
 
-
+socket.emit('temp', 0);

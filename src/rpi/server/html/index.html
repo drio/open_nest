@@ -5,14 +5,22 @@
 <div id="container"></div>
 
 <script id='template' type='text/template'>
-<div>
-  Current: <span data-hook="current"></span><br>
-  Desired: <span data-hook="desired"></span>
-    [<a href="#" class="more">more</a> |
-     <a href="#" class="less">less</a>]<br>
-  Humidity: <span data-hook="humidity"></span><br>
+<div class="container">
+  <div class="col_left"></div>
+  <div class="col_center">
+    <div> Current: <span data-hook="current"></span><br></div>
+    <div> Desired: <span data-hook="desired"></span><br></div>
+    <div> Humidity: <span data-hook="humidity"></span>%<br></div>
+    <div class="controls">
+      <a href="#" class="more"><img class="icon" src="imgs/plus.svg"></a>
+      <a href="#" class="less"><img class="icon" src="imgs/minus.svg"></a>
+      <a href="#" class="send hide"><img class="icon" src="imgs/send.svg"></a>
+    </div>
+  </div>
+  <div class="col_right"></div>
 </div>
 </script>
+
 <script src="/socket.io/socket.io.js"></script>
 <script> var socket = io(); </script>
 <script type="text/javascript" src="build/bundle.js" charset="utf-8"></script>

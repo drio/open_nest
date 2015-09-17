@@ -1,11 +1,13 @@
-var Model = require('ampersand-model');
+var Model  = require('ampersand-model');
 
 var Temperature = Model.extend({
-    props: {
-      current: 'number',
-      desired: 'number',
-      humidity: 'number'
-    },
+  props: {
+    fresh: ['boolean', 'true', 'true'],
+    current: ['number'],
+    desired: ['number'],
+    humidity: ['number'],
+  },
+
 
 });
 

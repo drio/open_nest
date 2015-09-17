@@ -23,6 +23,18 @@ app.get('/build/bundle.js', function(req, res){
   res.sendFile(__dirname + '/build/bundle.js');
 });
 
+app.get('/imgs/plus.svg', function(req, res){
+  res.sendFile(__dirname + '/imgs/plus.svg');
+});
+
+app.get('/imgs/minus.svg', function(req, res){
+  res.sendFile(__dirname + '/imgs/minus.svg');
+});
+
+app.get('/imgs/send.svg', function(req, res){
+  res.sendFile(__dirname + '/imgs/send.svg');
+});
+
 io.on('connection', function(socket){
   socket.on('temp', function(desiredTemp) {
     runProcess(desiredTemp, function(stdout) {

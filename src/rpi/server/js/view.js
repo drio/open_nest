@@ -1,4 +1,5 @@
-var View = require('ampersand-view');
+var View   = require('ampersand-view');
+var socket = io();
 
 var TempView = View.extend({
   template: function() {
@@ -13,12 +14,17 @@ var TempView = View.extend({
 
   events: {
     'mousedown .more': 'tempUp',
-    'mousedown .less': 'tempDown'
+    'mousedown .less': 'tempDown',
+    'mousedown .send': 'send'
   },
 
   tempUp: function() { this.model.desired += 1; },
 
   tempDown: function() { this.model.desired -= 1; },
+
+  send: function () {
+    socket.emit('temp', this.model.desired);
+  },
 
   render: function() {
     this.renderWithTemplate(this);

@@ -9,7 +9,7 @@ config = {
 
     module: {
         loaders: [
-            { loader: 'style!css!autoprefixer!sass?indentedSyntax=sass', test: /\.sass$/ },
+             { loader: 'style!css!autoprefixer!sass?indentedSyntax=sass', test: /\.sass$/ },
             //{ loader: 'coffee', test: /\.coffee$/ },
             { loader: 'url', test: /\.(gif|jpg|png|svg)$/ },
         ]
