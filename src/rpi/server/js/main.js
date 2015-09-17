@@ -12,19 +12,17 @@ document.querySelector('#container').appendChild(view.el);
 
 model.on('change:desired', function() {
   socket.emit('temp', model.desired);
-  if (model.fresh) {
+  if (model.fresh)
     model.fresh = false;
-  }
-  else {
-    d3.select('.send').classed('show', true);
-  }
+  else
+    d3.select('.send').classed('hide', false);
 });
 
 socket.on('temp', function(statusString){
   var status = JSON.parse(statusString);
 
   ['current', 'desired', 'humidity'].forEach(function(k) {
-    model[k] = status[k];
+    if (status[k] != model[k]) model[k] = status[k];
   });
 });
 

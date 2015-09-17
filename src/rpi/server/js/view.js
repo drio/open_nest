@@ -23,6 +23,7 @@ var TempView = View.extend({
   tempDown: function() { this.model.desired -= 1; },
 
   send: function () {
+    d3.select('.send').classed('show', true);
     socket.emit('temp', this.model.desired);
   },
 

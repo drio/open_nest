@@ -7,8 +7,6 @@ var Temperature = Model.extend({
     desired: ['number'],
     humidity: ['number'],
   },
-
-
 });
 
 module.exports = Temperature;
