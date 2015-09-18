@@ -11,7 +11,7 @@ view.render();
 document.querySelector('#container').appendChild(view.el);
 
 model.on('change:desired', function() {
-  socket.emit('temp', model.desired);
+  //socket.emit('temp', model.desired);
   if (model.fresh)
     model.fresh = false;
   else

@@ -17,8 +17,8 @@ typedef struct{
   int16_t current_humidity;
 } paquet;
 
-// hack to avoid SEG FAULT, issue #46 on RF24 github https://github.com/TMRh20/RF24.git
-unsigned long got_message;
+// https://github.com/TMRh20/RF24/issues/46
+paquet answer;
 
 void setup(void){
 	//Prepare the radio module
@@ -33,9 +33,10 @@ void setup(void){
 
 bool sendMessage(unsigned int temperature){
 	radio.stopListening();
+  unsigned long copyTemp = temperature;
 
-	printf("Now sending temperature: %d\n", temperature);
-	bool ok = radio.write(&temperature, sizeof(unsigned long));
+	printf("Now sending temperature: %lu\n", copyTemp);
+	bool ok = radio.write(&copyTemp, sizeof(unsigned long));
 	if (ok) {
 		printf("ok.\n");
 	}
@@ -56,13 +57,12 @@ bool sendMessage(unsigned int temperature){
 		return false;
 	}
   else {
-    paquet answer;
     radio.read(&answer, sizeof(answer));
-		printf("{\n");
-		printf("desired: %d,\n", answer.desired_temp);
-		printf("current: %d,\n", answer.current_temp);
-		printf("humidity: %d\n", answer.current_humidity);
-		printf("}");
+		printf("{");
+		printf("\"desired\": %d,", answer.desired_temp);
+		printf("\"current\": %d,", answer.current_temp);
+		printf("\"humidity\": %d", answer.current_humidity);
+		printf("}\n");
 		return true;
 	}
 }
@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
   while(switched == false && counter < 1) {
     switched = sendMessage(atoi(optarg));
     counter++;
-    sleep(1);
+    //sleep(1);
   }
 
   if (counter < 5) {

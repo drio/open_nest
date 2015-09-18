@@ -8,7 +8,7 @@ deploy:
 	ssh $(PI_SSH) 'mkdir -p $(PI_DIR)'
 
 	# Transfer the latest version of the communicator
-	scp -r * $(PI_SSH):$(PI_DIR)/
+	rsync --exclude=server/node_modules -avz -e ssh --progress * $(PI_SSH):$(PI_DIR)/
 
 	# Run deploy script
 	ssh $(PI_SSH) 'cd $(PI_DIR); ./deploy.sh'

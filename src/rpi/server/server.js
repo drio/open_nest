@@ -3,12 +3,19 @@ var http      = require('http').Server(app);
 var io        = require('socket.io')(http);
 var child     = require('child_process');
 var binRemote = "../RF24RaspberryCommunicator/remotish.sh"
+//var binRemote = "../RF24RaspberryCommunicator/remote"
 
 function runProcess(temp, cb) {
   child.execFile(
     binRemote, ['-t', temp],
     function(err, stdout, stderr) {
-      cb(stdout);
+      if (err !== null) {
+        console.log("Error in execFile: " + err);
+      }
+      else {
+        console.log(stdout);
+        cb(stdout);
+      }
     }
   );
 }

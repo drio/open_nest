@@ -10,4 +10,9 @@ g++ -Ofast -mfpu=vfp  \
   -mtune=arm1176jzf-s -Wall \
   -I./RF24/RPi/RF24/ \
   -lrf24-bcm remote.cpp -o remote
+
 ls -lacd remote
+
+echo "installing node packages"
+cd ../server
+#npm install
